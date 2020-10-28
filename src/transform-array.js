@@ -34,8 +34,11 @@ module.exports = function transform(arr) {
     } else if (arr[i] === doubPrev) {
       if (arr[i - 1] === undefined) {
         continue;
+      } else if (arr[i - 1] !== arr[i - 2] && result[result.length - 1] === result[result.length - 2]) {
+        result = [...result, arr[i - 1]];
+      } else {
+        result = [...result, arr[i - 1]];
       }
-      result = [...result, arr[i - 1], arr[i - 1]];
     } else {
       result = [...result, arr[i]];
     }
