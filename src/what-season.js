@@ -3,18 +3,12 @@ const CustomError = require("../extensions/custom-error");
 module.exports = function getSeason(date) {
   if (date === null || date === undefined) return 'Unable to determine the time of year!';
 
-  try{
-    var givenDate = new Date(date);
-  } catch (e) {
-    if (e instanceof RangeError) {
-      throw new UserException('THROW');
-    }
-
-  }
-  
-
-
+  var givenDate = new Date(date);
   let month = givenDate.getMonth();
+
+  if (givenDate == 'Invalid Date' || !Object.prototype.toString.call(date).match(['object Date'])) {
+    throw new UserException('THROWN');
+  }
 
   if ( month < 2 || month === 11) {
     return 'winter';
