@@ -5,7 +5,7 @@ const chainMaker = {
   getLength() {
     return this.result.length;
   },
-  addLink(value = '') {
+  addLink(value) {
     this.result.push(`( ${String(value)} )`);
     return this;
   },
