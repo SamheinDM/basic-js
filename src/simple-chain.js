@@ -5,22 +5,27 @@ const chainMaker = {
   getLength() {
     return this.result.length;
   },
-  addLink(value) {
-    if (this.result === []) {
-      this.result = [`( ${value.toString()} )`];
-    } else {
-      this.result = this.result.push(`~~( ${value.toString()} )`);
-    }
-    return this.result;
+  addLink(value = '') {
+    this.result.push(`( ${String(value)} )`);
+    return this;
   },
   removeLink(position) {
-    this.result.splice(position - 1, 1);
+    if (!isNaN(position) && this.result[position - 1]) {
+      this.result.splice(position - 1, 1);
+    } else {
+      this.result = [];
+      throw new Error('Error');
+    }
+    return this;
   },
   reverseChain() {
     this.result.reverse();
+    return this;
   },
   finishChain() {
-    return this.result.join('');
+    let answer = this.result.join('~~');
+    this.result = [];
+    return answer;
   }
 };
 
